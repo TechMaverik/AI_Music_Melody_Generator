@@ -1,4 +1,4 @@
-# AI Music Generator Using Markov Chain
+# AI Music Melody Generator Using Markov Chain
 ## What is Markov Chain?
 A Markov Chain is a mathematical way to predict what comes next based only on what is happening now, not on what happened before.
 
@@ -16,6 +16,6 @@ A Markov Chain is a mathematical way to predict what comes next based only on wh
 ## How to Run?
 1. <code>python3 -m venv .venv</code><br>
 2. <code>source .venv/bin/activate </code></br>
-3. <code>python music_generator.py</code>
+3. <code>python melody_generator.py</code>
 4. Open the generated .midi file using online MIDI player like <link>https://pianotify.com/online-midi-player</link>
 5. Enjoy

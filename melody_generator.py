@@ -1,12 +1,10 @@
 """
-AI Music Generator - AMG
+AI Music Melody Generator
 Uses Markov Chains to generate simple melodies based on musical patterns
 """
 
 import random
-import midiutil
 from midiutil import MIDIFile
-import os
 
 
 class MusicGenerator:
@@ -47,18 +45,17 @@ class MusicGenerator:
         if not self.transitions:
             return []
 
-        # Start with a random note from the scale
         current = random.choice(list(self.transitions.keys()))
         melody = [current]
 
         for _ in range(length - 1):
             if current in self.transitions and self.transitions[current]:
-                # Choose next note based on transition probabilities
+
                 next_note = random.choice(self.transitions[current])
                 melody.append(next_note)
                 current = next_note
             else:
-                # If no transition exists, choose a random note
+
                 current = random.choice(list(self.transitions.keys()))
                 melody.append(current)
 
@@ -78,7 +75,6 @@ class MusicGenerator:
         channel = 0
         time = 0
 
-        # Add track name and tempo
         midi.addTrackName(track, time, "AI Generated Melody")
         midi.addTempo(track, time, tempo)
 
@@ -89,7 +85,6 @@ class MusicGenerator:
         for i, pitch in enumerate(midi_notes):
             midi.addNote(track, channel, pitch, time + i, duration, volume)
 
-        # Write to file
         with open(filename, "wb") as output_file:
             midi.writeFile(output_file)
 
@@ -114,10 +109,8 @@ def main():
     print("=" * 50)
     print()
 
-    # Create music generator
     generator = MusicGenerator()
 
-    # Get user input
     try:
         length = int(input("Enter melody length (8-32 notes): "))
         if length < 8 or length > 32:
@@ -137,17 +130,10 @@ def main():
         tempo = 120
 
     print("\nGenerating melody...")
-
-    # Generate melody
     melody = generator.generate_melody(length)
-
-    # Print the melody
     generator.print_melody(melody)
-
-    # Save as MIDI file
     filename = f"ai_melody_{random.randint(1000, 9999)}.mid"
     generator.save_as_midi(melody, filename, tempo)
-
     print("Done")
     print("\nTip: Try importing it into GarageBand, FL Studio, or MuseScore")
 
